@@ -7,7 +7,7 @@ function App() {
     
     
     <h1>Computer Vision</h1>
-    <input></input>
+    <input placeholder='URL'></input>
     <button>Submit</button>
     
     </div>;
