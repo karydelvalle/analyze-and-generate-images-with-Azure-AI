@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 
 function App() {
 
@@ -6,7 +7,7 @@ function App() {
     
     
     <h1>Computer Vision</h1>
-    <input></input>
+    <input>URL</input>
     <button>Submit</button>
     
     </div>;
