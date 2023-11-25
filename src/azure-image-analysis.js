@@ -5,8 +5,9 @@ const analyzeImage = async (imageUrl) => {
   try {
     const apiUrl = process.env.REACT_APP_AZURE_API_ENDPOINT;
     console.log('API URL:', apiUrl)
+    
     const response = await axios.post(
-      process.env.REACT_APP_AZURE_API_ENDPOINT,
+      apiUrl,
       {
         url: imageUrl,
       },
