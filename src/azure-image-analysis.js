@@ -3,8 +3,8 @@ import axios from 'axios';
 
 const analyzeImage = async (imageUrl) => {
   try {
-    const apiUrl = process.env.VISION_ENDPOINT;
-    console.log('API URL:', apiUrl)
+    const apiUrl = 'https://apppracticaazure.cognitiveservices.azure.com/computervision/imageanalysis:analyze&v4.0=2023-02-01-preview';
+    
     
     const response = await axios.post(
       apiUrl,
