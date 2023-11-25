@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const analyzeImage = async (imageUrl) => {
   try {
-    const apiUrl = process.env.REACT_APP_AZURE_API_ENDPOINT;
+    const apiUrl = process.env.VISION_ENDPOINT;
     console.log('API URL:', apiUrl)
     
     const response = await axios.post(
@@ -18,7 +18,7 @@ const analyzeImage = async (imageUrl) => {
         },
         headers: {
           'Content-Type': 'application/json',
-          'Ocp-Apim-Subscription-Key': process.env.REACT_APP_AZURE_API_KEY,
+          'Ocp-Apim-Subscription-Key': process.env.VISION_KEY,
         },
       }
     );
