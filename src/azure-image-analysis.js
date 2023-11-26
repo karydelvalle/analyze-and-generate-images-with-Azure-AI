@@ -1,31 +1,45 @@
-// src/azure-image-analysis.js
+// ImageAnalyzer.js
+
+import React, { useState } from 'react';
 import axios from 'axios';
 
-const analyzeImage = async (imageUrl) => {
-  try {
-    const apiUrl = process.env.REACT_APP_AZURE_API_URL;
-    console.log('apiUrl', apiUrl)
-    
-    const response = await axios.post(
-      apiUrl,
-      {
-        url: imageUrl,
-      },
-      {
+const ImageAnalyzer = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
 
-        headers: {
-          'Content-Type': 'application/json',
-          'Ocp-Apim-Subscription-Key': process.env.REACT_APP_AZURE_API_KEY,
-        },
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedImage(file);
+  };
+
+  const handleAnalysis = async () => {
+    if (selectedImage) {
+      try {
+        const endpoint = 'https://apppracticaazure.cognitiveservices.azure.com/vision/v4.0/analyze';
+        const apiKey = '2f3d5c09acb4480b8b4150a46d9a3896';
+
+        const formData = new FormData();
+        formData.append('image', selectedImage);
+
+        const response = await axios.post(endpoint, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'Ocp-Apim-Subscription-Key': apiKey,
+          },
+        });
+
+        console.log('Analysis Result:', response.data);
+      } catch (error) {
+        console.error('Error analyzing image:', error);
       }
-    );
+    }
+  };
 
-    return response.data;
-  } catch (error) {
-    console.error('Error al analizar la imagen:', error);
-    throw error;
-  }
+  return (
+    <div>
+      <input type="file" onChange={handleImageChange} />
+      <button onClick={handleAnalysis}>Analyze Image</button>
+    </div>
+  );
 };
 
-export default analyzeImage;
-
+export default ImageAnalyzer;
