@@ -3,8 +3,8 @@ import axios from 'axios';
 
 const analyzeImage = async (imageUrl) => {
   try {
-    const apiUrl = 'https://apppracticaazure.cognitiveservices.azure.com/computervision/imageanalysis:analyze&v4.0=2023-02-01-preview';
-    
+    const apiUrl = process.env.REACT_APP_AZURE_API_URL;
+    console.log('apiUrl', apiUrl)
     
     const response = await axios.post(
       apiUrl,
@@ -12,13 +12,10 @@ const analyzeImage = async (imageUrl) => {
         url: imageUrl,
       },
       {
-        params: {
-          visualFeatures: 'Categories,Description,Color',
-          details: 'Landmarks',
-        },
+
         headers: {
           'Content-Type': 'application/json',
-          'Ocp-Apim-Subscription-Key': process.env.VISION_KEY,
+          'Ocp-Apim-Subscription-Key': process.env.REACT_APP_AZURE_API_KEY,
         },
       }
     );
